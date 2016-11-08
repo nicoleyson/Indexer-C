@@ -8,6 +8,7 @@ of files that contain that token. In your indexer, you will also maintain the fr
 each token appears in each file. The indexer should tokenize the files and produce an inverted index of
 how many times the word occurred in each file, sorted by word. Your output should be in the following
 format:
+```
 {"list" : [
 {"word0" : [
 {"filepath0" : count0},
@@ -19,6 +20,7 @@ format:
 {“filepath4” : count4}
 ]}
 ]}
+```
 
 Here is an example of how the indexer should work. If you are given the following set of files:
 File Path : File Content
@@ -26,6 +28,7 @@ File Path : File Content
 /adir/baa : A cat name Baa
 
 Your indexer should output:
+```
 {"list" : [
 {"A" : [
 {"baa" : 1},
@@ -48,7 +51,7 @@ Your indexer should output:
 {"baa" : 2}
 ]}
 ]}
-
+```
 After constructing the entire inverted index in memory, the indexer will save it to a file.
 An inverted index is a sequence of mappings where each mapping maps a token (e.g.,
 “dog”) to a list of records, with each record containing the name of a file whose content
@@ -66,6 +69,7 @@ Tokens are not case sensitive. All upper-case letters should be converted to low
 The tokenizer and sorted-list that you wrote in earlier assignments may be useful for this
 assignment (although you have to modify the tokenizer to work with a file, rather than a
 string.
+
 # Implementation
  Your program must implement the following command-line interface:
 index <inverted-index file name> <directory or file name>
@@ -82,9 +86,11 @@ given a set of separators. Instead, we define tokens as any sequence of consecut
 characters (a-z, A-Z, 0-9) starting with an alphabetic character. You can modify your tokenizer to
 read() from a file you opened with open().
 Examples of tokens according to the above definition include:
-a, aba, c123
+```a, aba, c123```
 If a file contains
-This an$example12 mail@rutgers
+```
+This 
+an$example12 mail@rutgers
 it should tokenize to
 this
 an
@@ -92,6 +98,7 @@ an
 example12
 mail
 rutgers
+```
 The inverted index file that your indexer writes must follow the JSON (JavaScript Object Notation)
 format. Words must be sorted in alphanumeric order. All characters of the word should be first
 converted to lowercase. Your output should print with the lists arranged in ascending sorted order
@@ -107,6 +114,7 @@ same name as the inverted-index file name, you should ask the user if they wish 
 name of the directory or file you want to index does not exist, your indexer should print an error
 message and exit gracefully rather than crash. There are many other error cases that you will need to
 consider.
+
 You should use multi-file compilation to carefully organize your code. For example, the tokenizer
 should be in its own .c file, with a .h file that callers should include. The same applies for the sortedlist.
 You should also write a makefile to efficiently compile and link your indexer
